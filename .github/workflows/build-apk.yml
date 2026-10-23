@@ -1,0 +1,42 @@
+name: Build Omosis APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Omosis_Android_APK_Project
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Build Omosis APK
+        run: gradle --no-daemon assembleDebug
+
+      - name: Upload Omosis APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Omosis-V12-APK
+          path: Omosis_Android_APK_Project/app/build/outputs/apk/debug/app-debug.apk
