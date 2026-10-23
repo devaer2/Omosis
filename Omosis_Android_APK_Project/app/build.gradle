@@ -1,0 +1,24 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.omosis.app'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.omosis.app'
+        minSdk 23
+        targetSdk 35
+        versionCode 12
+        versionName '12.0'
+    }
+
+    buildTypes {
+        debug { minifyEnabled false }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
